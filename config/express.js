@@ -34,6 +34,7 @@ module.exports = () => {
   app.set('view engine', 'ejs');  // 将ejs设置为默认的模板引擎
 
   require('../app/routes/index.server.route.js')(app);
+  require('../app/routes/users.server.route.js')(app);
 
   app.use(express.static('./public'));  // 提供静态文件服务
   return app;
