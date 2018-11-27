@@ -5,7 +5,9 @@ const config = require('./config'),
   compress = require('compression'),  // 提供相应内容的压缩功能
   bodyParser = require('body-parser'),  // 包含几个处理请求数据的中间件
   methodOverride = require('method-override'),  // 提供对HTTP DELETE和PUT两个遗留方法的支持
-  session = require('express-session');  // 用session对Web应用访客的行为进行跟踪
+  session = require('express-session'),  // 用session对Web应用访客的行为进行跟踪
+  flash = require('connect-flash'),
+  passport = require('passport');
 
 module.exports = () => {
   const app = express();
@@ -32,6 +34,10 @@ module.exports = () => {
 
   app.set('views', './app/views');  // 设置视图文件的存储目录
   app.set('view engine', 'ejs');  // 将ejs设置为默认的模板引擎
+
+  app.use(flash());
+  app.use(passport.initialize());   // 启动passport模块
+  app.use(passport.session());  // 追踪用户会话
 
   require('../app/routes/index.server.route.js')(app);
   require('../app/routes/users.server.route.js')(app);
