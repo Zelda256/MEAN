@@ -80,7 +80,7 @@ UserSchema.methods.authenticate = function(password) {
   return this.password === this.hashPassword(password);
 };
 
-// 自定义静态方法
+// 自定义静态方法 创建用户名
 UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
   const _this = this;
   const possibleUsername = username + (suffix || '');

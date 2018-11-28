@@ -18,6 +18,32 @@ module.exports = app => {
   
   app.get('/signout', users.signout);
 
+  app.get('/oauth/facebook', passport.authenticate('facebook', {
+    // failWithError: true,
+    failureRedirect: '/signin',
+  }));
+
+  app.get('/oauth/facebook/callback', passport.authenticate('facebook', {
+    // failWithError: true,
+    failureRedirect: '/signin',
+    successRedirect: '/',
+  }));
+
+  app.get('/oauth/google', passport.authenticate('google', {
+    // failWithError: true,
+    failureRedirect: '/signin',
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ],
+  }));
+
+  app.get('/oauth/google/callback', passport.authenticate('google', {
+    // failWithError: true,
+    failureRedirect: '/signin',
+    successRedirect: '/',
+  }));
+
   app.route('/users')
     .post(users.create)
     .get(users.list);

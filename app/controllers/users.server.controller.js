@@ -74,6 +74,38 @@ exports.signout = (req, res) => {
   res.redirect('/');
 };
 
+exports.saveOAuthUserProfile = (req, res, profile, done) => {
+  User.findOne({
+    provider: profile.provider,
+    providerId: profile.providerId,
+  }, (err, user) => {
+    if (err) {
+      return done(err);
+    } else {
+      if (!user) {
+        let possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
+
+        User.findUniqueUsername(possibleUsername, null, (availableUsername) => {
+          profile.username = availableUsername;
+
+          user = new User(profile);
+
+          user.save((err) => {
+            if (err) {
+              let message= this.getErrorMessage(err);
+              req.flash('error', message);
+              return res.redirect('/signup');
+            }
+            return done(err, user);
+          });
+        });
+      } else {
+        return done(err, user);
+      }
+    }
+  });
+};
+
 exports.create = (req, res, next) => {
   const user = new User(req.body);
 
