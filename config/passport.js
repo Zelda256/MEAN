@@ -21,4 +21,5 @@ module.exports = () => {
   require('./strategies/local')();
   require('./strategies/facebook')();
   require('./strategies/google')();
+  require('./strategies/github')();
 };

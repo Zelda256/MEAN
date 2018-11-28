@@ -44,6 +44,18 @@ module.exports = app => {
     successRedirect: '/',
   }));
 
+  app.get('/oauth/github', passport.authenticate('github', {
+    // failWithError: true,
+    failureRedirect: '/signin',
+  }));
+
+  app.get('/oauth/github/callback', passport.authenticate('github', {
+    // failWithError: true,
+    failureRedirect: '/signin',
+    successRedirect: '/',
+  }));
+
+
   app.route('/users')
     .post(users.create)
     .get(users.list);

@@ -23,7 +23,7 @@ const getErrorMessage = (err) => {
   return message;
 };
 
-exports.renderSignin = (req, res, next) => {
+exports.renderSignin = (req, res) => {
   if (!req.user) {
     res.render('signin', {
       title: 'Sign-in Form',
@@ -34,7 +34,7 @@ exports.renderSignin = (req, res, next) => {
   }
 };
 
-exports.renderSignup = (req, res, next) => {
+exports.renderSignup = (req, res) => {
   if (!req.user) {
     res.render('signup', {
       title: 'Sign-up Form',
@@ -74,7 +74,7 @@ exports.signout = (req, res) => {
   res.redirect('/');
 };
 
-exports.saveOAuthUserProfile = (req, res, profile, done) => {
+exports.saveOAuthUserProfile = (req, profile, done) => {
   User.findOne({
     provider: profile.provider,
     providerId: profile.providerId,
@@ -94,7 +94,7 @@ exports.saveOAuthUserProfile = (req, res, profile, done) => {
             if (err) {
               let message= this.getErrorMessage(err);
               req.flash('error', message);
-              return res.redirect('/signup');
+              // return res.redirect('/signup');
             }
             return done(err, user);
           });
