@@ -7,7 +7,7 @@ let mainApplicationModule = angular.module(mainApplicationModuleName, ['ngRoute'
 
 // 配置URL模式
 mainApplicationModule.config(['$locationProvider', 
-  function($locationProvider) {
+  ($locationProvider) => {
     $locationProvider.hashPrefix('!');
   }
 ]);
