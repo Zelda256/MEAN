@@ -38,10 +38,11 @@ module.exports = () => {
   app.use(flash());
   app.use(passport.initialize());   // 启动passport模块
   app.use(passport.session());  // 追踪用户会话
+  app.use(express.static('./public'));  // 提供静态文件服务
+
 
   require('../app/routes/index.server.route.js')(app);
   require('../app/routes/users.server.route.js')(app);
 
-  app.use(express.static('./public'));  // 提供静态文件服务
   return app;
 };
