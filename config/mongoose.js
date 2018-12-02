@@ -7,6 +7,7 @@ module.exports = () => {
   const db = mongoose.connect(config.db, { useCreateIndex: true, useNewUrlParser: true });
 
   require('../app/models/user.server.model');  // 注册User模型
+  require('../app/models/artical.server.model');
 
   return db;
 };
