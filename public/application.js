@@ -3,7 +3,7 @@
 // 应用主模块名
 let mainApplicationModuleName = 'mean';
 // 创建应用主模块
-let mainApplicationModule = angular.module(mainApplicationModuleName, ['ngRoute', 'users', 'example']);
+let mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource', 'ngRoute', 'users', 'example', 'articles']);
 
 // 配置URL模式
 mainApplicationModule.config(['$locationProvider', 
