@@ -7,7 +7,7 @@ const express = require('./config/express'),
   Passport = require('./config/passport');
 
 const db = mongoose();
-const app = express();
+const app = express(db);
 const passport = Passport();
 
 app.listen(3000, () => console.log('Server running at http://localhost:3000/'));
