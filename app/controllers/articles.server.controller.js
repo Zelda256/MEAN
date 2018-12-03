@@ -42,7 +42,7 @@ exports.list = (req, res) => {
 };
 
 exports.articleByID = (req, res, next, id) => {
-  Article.findById(id).populate('creator', 'firstName lastName fullName')
+  Article.findById({_id: id}).populate('creator', 'firstName lastName fullName')
     .exec((err, article) => {
       if (err) {
         return next(err);
